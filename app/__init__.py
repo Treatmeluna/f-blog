@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
@@ -16,7 +17,10 @@ db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
 migrate = Migrate()
 moment = Moment()
 
-def create_app():
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+
+def create_app(config_name):
     app = Flask(__name__)
 
     app.config.from_object(config[config_name])
@@ -29,6 +33,7 @@ def create_app():
         migrate.init_app(app, db)
 
     moment.init_app(app)
+    login_manager.init_app(app)
 
     from app.main import main as main_bp
     app.register_blueprint(main_bp)
