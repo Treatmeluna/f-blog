@@ -16,6 +16,16 @@
 
     {% block content %}
     <div class='container my-3'>    
+        <!--flash() 의 메시지 표시-->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;
+            </button>
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <!-- 각 페이지의 내용이 들어감 -->
         {% block page_content %}
         {% endblock %}
