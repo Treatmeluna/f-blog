@@ -11,15 +11,25 @@
             <span class="navbar-toggle-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse flex-grew-0"
-            id="navbarNav">
+        <div class="collapse navbar-collapse flex-grew-0" id="navbarNav">
+            {% if current_user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">
+                            {{ current_user.username }} 로그아웃
+                        </a>
+                    </li>
+                </ul>
+            {% else %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="#">로그인</a>
+                        href="{{ url_for('auth.login') }}">
+                        로그인
+                    </a>
                 </li>
             </ul>
-
+            {% endif %}
         </div>
     </div>
 </nav>
