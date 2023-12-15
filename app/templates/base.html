@@ -25,5 +25,11 @@
     <script src="{{ url_for('static', filename='jquery-3.7.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
 
+    <!-- moment 사용 설정 -->
+    {% block script %}
+        {{ moment.include_moment() }}
+        {{ moment.locale('ko') }}
+    {% endblock %}
+
 </body>
 </html>
